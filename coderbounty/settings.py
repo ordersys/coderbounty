@@ -180,6 +180,8 @@ PAYPAL_SANDBOX_PASSWORD = os.environ.get('PAYPAL_SANDBOX_PASSWORD', 'PAYPAL_SAND
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+MEDIA_URL = "/media/"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -255,3 +257,9 @@ def get_cache():
     }
 
 CACHES = get_cache()
+
+USERS_AVATAR_PATH = 'avatars'
+AVATAR_PATH = os.path.join(MEDIA_ROOT, USERS_AVATAR_PATH)
+
+if not os.path.exists(AVATAR_PATH):
+    os.makedirs(AVATAR_PATH)

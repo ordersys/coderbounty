@@ -195,8 +195,12 @@ class UserProfile(models.Model):
     balance = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     payment_service = models.CharField(max_length=255, null=True, blank=True, choices=CHOICE_PAYMANT_SERVICE)
     payment_service_email = models.EmailField(max_length=255, null=True, blank=True, default='')
+    user_avatar = models.ImageField(blank=True, upload_to=settings.USERS_AVATAR_PATH)
 
     def avatar(self, size=36):
+        if self.user_avatar:
+            return self.user_avatar.url
+
         for account in self.user.socialaccount_set.all():
             if 'avatar_url' in account.extra_data:
                 return account.extra_data['avatar_url']
